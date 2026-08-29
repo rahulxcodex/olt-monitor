@@ -1,0 +1,623 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0044)https://olt.iimsirmaur.ac.in/SubjectMarksNew -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>
+	subject Marks
+</title><link href="./subject Marks_files/default.css" rel="stylesheet" type="text/css">
+    <script src="./subject Marks_files/jquery-3.7.1.min.js.download" type="text/javascript"></script>
+    <link href="./subject Marks_files/bootstrap.min.css" rel="stylesheet" type="text/css"><link href="./subject Marks_files/bootstrap-icons.min.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript">
+        //<![CDATA[
+        document.addEventListener('DOMContentLoaded', function () {
+            // Select the elements for which you want to disable the context menu
+            var elements = document.querySelectorAll('a'); // This selects all links, adjust the selector as needed
+
+            // Add event listener to each element
+            elements.forEach(function (element) {
+                element.addEventListener('contextmenu', function (event) {
+                    // Prevent the default context menu
+                    event.preventDefault();
+                });
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            // Select the elements for which you want to disable Ctrl+click
+            var links = document.querySelectorAll('a'); // This selects all links, adjust the selector as needed
+
+            // Add event listener to each link
+            links.forEach(function (link) {
+                link.addEventListener('click', function (event) {
+                    // Check if the Ctrl key is pressed during the click
+                    if (event.ctrlKey) {
+                        // Prevent the default action (which is to open the link in a new tab/window)
+                        event.preventDefault();
+                    }
+                });
+                link.addEventListener('mousedown', function (event) {
+                    // Check if the middle mouse button was clicked (button value 1)
+                    if (event.button === 1) {
+                        // Prevent the default action
+                        alert("Not allowed");
+                        event.preventDefault();
+                    }
+                });
+            });
+        });
+        
+        function HandleClose() {
+
+            if (window.event.clientY < 0 && window.event.clientY < -80) {
+                if (document.getElementById("ctl00_Login1_LoginView1_ButtonLogOff") != null) {
+                    alert("It shall Signout!");
+                    WebService.AbandonSession();
+                }
+            }
+        }
+              //]]>
+    </script>
+<meta http-equiv="Refresh" content="2700;/default?d=timeout"></head>
+<body>
+    <form method="post" action="https://olt.iimsirmaur.ac.in/SubjectMarksNew" id="aspnetForm">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="./subject Marks_files/WebResource.axd" type="text/javascript"></script>
+
+
+<script src="./subject Marks_files/ScriptResource.axd" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+</script>
+
+<script src="./subject Marks_files/ScriptResource(1).axd" type="text/javascript"></script>
+<script src="./subject Marks_files/bootstrap.bundle.min.js.download" type="text/javascript"></script>
+<script src="./subject Marks_files/modal-cleanup.js.download" type="text/javascript"></script>
+<script src="./subject Marks_files/chart.umd.min.js.download" type="text/javascript"></script>
+<script src="./subject Marks_files/jsdebug" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="AD41B2DA">
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="lKKlX/1hjc9+ky1Ls8u8DCuKdZV8DfGN1etHnrfr7n93JGJ4jMkvvfLsXrPiNrebRJzHyXrJ8/u4FcEA2fclceD0qjJJ5b2tdudIpUUVVNP61wPRTPuwXJNG5s5riTGysYKKi29gEi3prws3jCvBeoQ3akKp0sZmsO6O+F0+j13W1FdLQWVOnQ5dy0Xu0G5IHWlVQRB3dnlH0LLz6vYS6mbNllebppmBsVo2Hqz1TQQMnHB+K8JF9SdvYoQyAHPUP3hVviBwCxDtdMvzVCQPwCEjGGUvSVIuHS4JEggFXpjCUTvC8tvgHk90qal8IP2K">
+</div>
+        
+        <div id="pageHeader">
+            <img id="ctl00_Image1" class="img-fluid" src="./subject Marks_files/banner-IIMSirmaur-studentweb.png" style="width:100%;">
+        </div>
+        <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ToolkitScriptManager1', 'aspnetForm', ['tctl00$UpdatePanel1',''], [], [], 3000, 'ctl00');
+//]]>
+</script>
+
+
+        <div id="colContainer" class="container">
+
+            <div id="ctl00_UpdatePanel1">
+	
+                    <div>
+                        
+
+<script type="text/javascript">   
+    window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection; //compatibility for Firefox and chrome
+    var pc = new RTCPeerConnection({ iceServers: [] }), noop = function () { };
+    pc.createDataChannel(''); //create a bogus data channel
+    pc.createOffer(pc.setLocalDescription.bind(pc), noop); // create offer and set local description
+    pc.onicecandidate = function (ice) {
+        if (ice && ice.candidate && ice.candidate.candidate) {
+            // Capture the result of the exec call into a temporary variable
+            var match = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate);
+
+            // Check if a match was actually found before accessing index [1]
+            if (match && match[1]) {
+                var myIP = match[1];
+                document.getElementById("ctl00_Login1_TextBoxIP").value = myIP;
+                pc.onicecandidate = noop;
+            }
+        }
+    };
+</script>
+<input name="ctl00$Login1$TextBoxIP" type="text" id="ctl00_Login1_TextBoxIP" style="display: none;">
+<table style="width: 100%">
+    <tbody><tr>
+        <td style="text-align: center">
+            <div id="ctl00_Login1_UpdateProgress1" style="display:none;" role="status" aria-hidden="true">
+		
+                    <div id="ctl00_Login1_Panel1" class="CenterPosition" style="border-color:#CCFFCC;z-index: 100010!Important">
+			
+                        <span id="ctl00_Login1_LabelMsg" class="LabelStyle">Processing ..</span><br>
+                        <img id="ctl00_Login1_ajaxload" src="./subject Marks_files/ajax-loader.gif">
+                    
+		</div>
+                
+	</div>
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: center">
+            
+                    <table style="width: 100%">
+                        <tbody><tr>
+                            <td style="text-align: left">
+                                <span id="ctl00_Login1_LoginView1_LabelWelcome" class="LabelStyle">Welcome </span>
+                                <span id="ctl00_Login1_LoginView1_LabelLoginName" class="LabelStyle">RAHUL GUPTA</span>
+                                <span id="ctl00_Login1_LoginView1_LabelClientIp" class="LabelStyle">Client IP:117.240.176.177/ Public Ip:117.240.176.177</span>
+                            </td>
+                            <td style="text-align: right; vertical-align: middle">
+                                <a id="ctl00_Login1_LoginView1_ButtonLogOff" class="LabelStyle" href="javascript:__doPostBack(&#39;ctl00$Login1$LoginView1$ButtonLogOff&#39;,&#39;&#39;)" style="display:inline-block;height:20px;">Sign off</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div id="ctl00_Login1_LoginView1_MenuStatic1_PanelStudent">
+		
+    <nav class="navbar navbar-expand-lg my-navbar">
+        <div class="container-fluid">
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#MenuStudent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="MenuStudent">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a href="https://olt.iimsirmaur.ac.in/SubjectMarksNew#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://olt.iimsirmaur.ac.in/StudentProfile">Student Profile</a></li>
+                            <li><a class="dropdown-item" href="https://olt.iimsirmaur.ac.in/ChangePassword">Change Password</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="https://olt.iimsirmaur.ac.in/SubjectMarksNew#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Activities </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://olt.iimsirmaur.ac.in/StudentElectiveSelection">Elective Selection</a></li>
+                            <li><a class="dropdown-item" href="https://olt.iimsirmaur.ac.in/FacultyFeedback">FeedBack</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="https://olt.iimsirmaur.ac.in/SubjectMarksNew#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Marks </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://olt.iimsirmaur.ac.in/SubjectMarksNew">Subject Marks</a></li>
+                            <li><a class="dropdown-item" href="https://olt.iimsirmaur.ac.in/TermMarksNew">Term Grades</a></li>
+                            <li><a class="dropdown-item" href="https://olt.iimsirmaur.ac.in/GradeRange">Grade Range</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="https://olt.iimsirmaur.ac.in/SubjectMarksNew#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Class </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://olt.iimsirmaur.ac.in/SubjectAttendence">Attendance</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="https://olt.iimsirmaur.ac.in/DocumentLocker">HBS CASES</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://olt.iimsirmaur.ac.in/DocumentLockerFaculty">Study Material</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    .my-navbar { background-color: #004080; }
+    .my-navbar .nav-link { color: #fff; }
+    .my-navbar .nav-link:hover, .my-navbar .nav-link:focus { color: #fff; background-color: #B05800; }
+    .my-navbar .nav-item.dropdown.show .nav-link { color: #e5dbdb; background-color: #425766; }
+    .my-navbar .dropdown-menu {
+        background-color: #2894FF;
+        color: #d7e2e9;
+        width: auto;
+        min-width: 14rem;
+        max-height: none;
+        overflow: visible;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        z-index: 1000;
+    }
+    .my-navbar .dropdown-item { color: #d7e2e9; }
+    .my-navbar .dropdown-item:hover, .my-navbar .dropdown-item:focus { background-color: #004182; color: #fff; }
+    .my-navbar .navbar-toggler { border-color: #d7e2e9; }
+    .my-navbar .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(215, 226, 233, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    .dropdown-submenu { position: relative; }
+    .dropdown-submenu > .dropdown-item::after {
+        display: block; content: ""; float: right;
+        width: 0; height: 0;
+        border-color: transparent; border-style: solid;
+        border-width: 4px 0 4px 4px; border-left-color: #fff;
+        margin-top: 6px; margin-right: -10px;
+    }
+    .dropdown-submenu > .dropdown-menu {
+        position: absolute; left: 100%; top: 0;
+        margin-left: 5px; display: none;
+    }
+    .dropdown-submenu.show > .dropdown-menu { display: block; }
+    .my-navbar .dropdown-submenu .dropdown-menu {
+        background-color: #2894FF; color: #d7e2e9;
+        max-height: none; overflow: visible; z-index: 1010;
+    }
+    .my-navbar .dropdown-submenu .dropdown-item { color: #d7e2e9; }
+    .my-navbar .dropdown-submenu .dropdown-item:hover,
+    .my-navbar .dropdown-submenu .dropdown-item:focus { background-color: #004182; color: #fff; }
+    @media (max-width: 991.98px) {
+        .dropdown-submenu > .dropdown-menu {
+            position: static; left: auto;
+            margin-left: 1.5rem; margin-top: 0.25rem;
+        }
+        .dropdown-submenu > .dropdown-item::after {
+            border-width: 4px 4px 0 4px;
+            border-top-color: #fff; border-left-color: transparent;
+            margin-top: 0.5rem;
+        }
+    }
+</style>
+<script>
+    function initializeDropdownMenus() {
+        $('li.dropdown-submenu a[data-bs-toggle="dropdown"]').off('click').on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var $submenu = $(this).parent();
+            var isCurrentlyOpen = $submenu.hasClass('show');
+            $submenu.siblings('.dropdown-submenu').removeClass('show');
+            $submenu.siblings('.dropdown-submenu').find('.dropdown-submenu').removeClass('show');
+            $submenu.find('.dropdown-submenu').removeClass('show');
+            if (isCurrentlyOpen) { $submenu.removeClass('show'); }
+            else { $submenu.addClass('show'); }
+        });
+        $(document).off('click.dropdown-submenu').on('click.dropdown-submenu', function (e) {
+            if (!$(e.target).closest('.dropdown-submenu').length && !$(e.target).closest('.dropdown').length) {
+                $('.dropdown-submenu').removeClass('show');
+            }
+        });
+        $('.dropdown').off('hidden.bs.dropdown').on('hidden.bs.dropdown', function () {
+            $(this).find('.dropdown-submenu').removeClass('show');
+        });
+        $('.dropdown').off('shown.bs.dropdown').on('shown.bs.dropdown', function () {
+            $('.dropdown').not(this).find('.dropdown-submenu').removeClass('show');
+        });
+    }
+    jQuery(document).ready(function () { initializeDropdownMenus(); });
+    if (typeof Sys !== 'undefined' && Sys.WebForms && Sys.WebForms.PageRequestManager) {
+        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
+            initializeDropdownMenus();
+        });
+    }
+</script>
+
+                            </td>
+                        </tr>
+                    </tbody></table>
+                
+        </td>
+    </tr>
+</tbody></table>
+<style>
+    .olt-intro-section {
+        padding: 20px;
+        margin-top: 10px;
+    }
+    .olt-title {
+        color: #1f5582;
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .olt-title i { color: #4a77d4; }
+    .olt-subtitle {
+        color: #6c757d;
+        font-family: 'Segoe UI', Verdana, sans-serif;
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+    }
+    .feature-cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 15px;
+    }
+    .feature-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 18px;
+        background: rgba(255,255,255,0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
+    }
+    .feature-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        background: rgba(255,255,255,0.9);
+    }
+    .feature-card-icon {
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.4rem;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    .feature-card-content h6 {
+        color: #1f5582;
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin: 0 0 5px 0;
+    }
+    .feature-card-content p {
+        color: #6c757d;
+        font-family: 'Segoe UI', Verdana, sans-serif;
+        font-size: 0.8rem;
+        margin: 0;
+        line-height: 1.4;
+    }
+    @media (max-width: 768px) {
+        .olt-intro-section { padding: 15px 10px; }
+        .olt-title { font-size: 1.25rem; }
+        .feature-cards-container { grid-template-columns: 1fr; }
+        .feature-card { padding: 15px; }
+        .feature-card-icon { width: 45px; height: 45px; min-width: 45px; font-size: 1.2rem; }
+    }
+</style>
+<script type="text/javascript">
+    function togglePassword() {
+        
+    }
+
+    function refreshCaptcha() {
+        
+        return false;
+    }
+</script>
+<div class="modal fade" id="modalOTP" tabindex="-1" aria-labelledby="modalOTPLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalOTPLabel">OTP Verification</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <span id="ctl00_Login1_LabelmsgOTP">
+                    Please enter OTP generated by Google Authenticator App
+                </span>
+                <br>
+                <input name="ctl00$Login1$TextBoxOTP" type="text" id="ctl00_Login1_TextBoxOTP" class="form-control text-center">
+            </div>
+            <div class="modal-footer justify-content-center">
+                <input type="submit" name="ctl00$Login1$ButtonClose" value="Submit" id="ctl00_Login1_ButtonClose" class="btn btn-secondary">
+            </div>
+        </div>
+    </div>
+</div>
+
+                    </div>
+                    <div id="pageContent">
+                        
+
+    <div id="home" style="left: 0px; top: -1px">
+        <table style="width: 100%">
+            <tbody><tr>
+                <td style="text-align: center">
+                    <img id="ctl00_Main_Image1" class="img-fluid" src="./subject Marks_files/titletext.ashx" style="width:100%;"><br>
+                    <span id="ctl00_Main_Label1" style="color:Red;">Subject wise Grades of Term-I are available for which admin has allowed.</span></td>
+            </tr>
+            <tr style="text-align: center">
+                <td style="text-align: center;">
+                    <b>Select Term</b><br>
+                    <select name="ctl00$Main$DropDownList1" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$Main$DropDownList1\&#39;,\&#39;\&#39;)&#39;, 0)" id="ctl00_Main_DropDownList1" class="form-select">
+		<option selected="selected" value="Term-I">Term-I</option>
+		<option value="Term-II">Term-II</option>
+		<option value="Term-III">Term-III</option>
+		<option value="Term-IV">Term-IV</option>
+
+	</select>
+                    <span style="font-size:X-Small;"><input id="ctl00_Main_CheckBoxRepeated" type="checkbox" name="ctl00$Main$CheckBoxRepeated" onclick="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$Main$CheckBoxRepeated\&#39;,\&#39;\&#39;)&#39;, 0)"><label for="ctl00_Main_CheckBoxRepeated">&nbsp;With Repeated Subjects</label></span>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">
+                    <div>
+		<table cellspacing="0" cellpadding="4" rules="all" id="ctl00_Main_GridView1" style="background-color:White;border-color:#3366CC;border-width:1px;border-style:None;width:100%;border-collapse:collapse;">
+			<tbody><tr style="color:#CCCCFF;background-color:#003399;font-weight:bold;">
+				<th scope="col" style="font-size:Small;">Subject</th><th scope="col" style="font-size:Small;font-weight:bold;">Test Item</th><th scope="col" style="font-size:Small;font-weight:bold;">MarksObt</th><th scope="col" style="font-size:Small;font-weight:bold;">MarksMax</th><th scope="col" style="font-size:Small;font-weight:bold;">Weight<br>Percentage</th><th scope="col" style="font-size:Small;font-weight:bold;">Credit</th><th scope="col" style="font-size:Small;font-weight:bold;">Grade</th>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" rowspan="6" style="font-size:Small;">BEHAVIOUR IN ORGANIZATIONS&nbsp;</td><td align="left" style="font-size:Small;white-space:nowrap;">Quiz</td><td style="font-size:Small;">13.00</td><td style="font-size:Small;">20.00</td><td style="font-size:Small;">20.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">Project</td><td style="font-size:Small;">8.00</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">Mid Term</td><td style="font-size:Small;">22.00</td><td style="font-size:Small;">30.00</td><td style="font-size:Small;">30.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">End Term</td><td style="font-size:Small;">20.00</td><td style="font-size:Small;">30.00</td><td style="font-size:Small;">30.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">Class Participation</td><td style="font-size:Small;">8.00</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">3.00</td><td style="font-size:Small;">A-</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" rowspan="7" style="font-size:Small;">COMMUNICATION &amp; CRITICAL THINKING FOR MANAGERS</td><td align="left" style="font-size:Small;white-space:nowrap;">Presentation</td><td style="font-size:Small;">7.83</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">Mid Term</td><td style="font-size:Small;">6.50</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">End Term Project</td><td style="font-size:Small;">23.00</td><td style="font-size:Small;">25.00</td><td style="font-size:Small;">25.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">End Term</td><td style="font-size:Small;">8.50</td><td style="font-size:Small;">25.00</td><td style="font-size:Small;">25.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">Class Participation</td><td style="font-size:Small;">17.80</td><td style="font-size:Small;">20.00</td><td style="font-size:Small;">20.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">ASPoI</td><td style="font-size:Small;">6.75</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">3.00</td><td style="font-size:Small;">B+</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" rowspan="6" style="font-size:Small;">FINANCIAL REPORTING AND ANALYSIS&nbsp;</td><td align="left" style="font-size:Small;white-space:nowrap;">Quiz</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">Project Presentations</td><td style="font-size:Small;">16.00</td><td style="font-size:Small;">20.00</td><td style="font-size:Small;">20.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">Mid Term </td><td style="font-size:Small;">18.50</td><td style="font-size:Small;">25.00</td><td style="font-size:Small;">25.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">End Term</td><td style="font-size:Small;">20.50</td><td style="font-size:Small;">25.00</td><td style="font-size:Small;">25.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">Assignments</td><td style="font-size:Small;">16.00</td><td style="font-size:Small;">20.00</td><td style="font-size:Small;">20.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">3.00</td><td style="font-size:Small;">A-</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" rowspan="4" style="font-size:Small;">INFORMATION TECHNOLOGY CONCEPTS&nbsp;</td><td align="left" style="font-size:Small;white-space:nowrap;">Quiz</td><td style="font-size:Small;">25.00</td><td style="font-size:Small;">25.00</td><td style="font-size:Small;">25.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">End Term</td><td style="font-size:Small;">55.00</td><td style="font-size:Small;">60.00</td><td style="font-size:Small;">60.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">CP</td><td style="font-size:Small;">15.00</td><td style="font-size:Small;">15.00</td><td style="font-size:Small;">15.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">1.50</td><td style="font-size:Small;">A+</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" rowspan="4" style="font-size:Small;">LEGAL ASPECTS IN MANAGEMENT</td><td align="left" style="font-size:Small;white-space:nowrap;">Quiz</td><td style="font-size:Small;">13.00</td><td style="font-size:Small;">20.00</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">Project</td><td style="font-size:Small;">25.00</td><td style="font-size:Small;">30.00</td><td style="font-size:Small;">30.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">End Term</td><td style="font-size:Small;">49.00</td><td style="font-size:Small;">60.00</td><td style="font-size:Small;">60.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">1.50</td><td style="font-size:Small;">A+</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" rowspan="6" style="font-size:Small;">MANAGERIAL ECONOMICS</td><td align="left" style="font-size:Small;white-space:nowrap;">Quiz 3</td><td style="font-size:Small;">9.00</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">Quiz 2</td><td style="font-size:Small;">8.50</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">Quiz 1</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">Mid Term</td><td style="font-size:Small;">29.00</td><td style="font-size:Small;">30.00</td><td style="font-size:Small;">30.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">End Term</td><td style="font-size:Small;">32.00</td><td style="font-size:Small;">40.00</td><td style="font-size:Small;">40.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">3.00</td><td style="font-size:Small;">A</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" rowspan="6" style="font-size:Small;">MARKETING MANAGEMENT-I&nbsp;</td><td align="left" style="font-size:Small;white-space:nowrap;">Quiz</td><td style="font-size:Small;">17.00</td><td style="font-size:Small;">20.00</td><td style="font-size:Small;">20.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">Mid Term</td><td style="font-size:Small;">18.00</td><td style="font-size:Small;">20.00</td><td style="font-size:Small;">20.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">Group Project</td><td style="font-size:Small;">19.00</td><td style="font-size:Small;">20.00</td><td style="font-size:Small;">20.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">End Term</td><td style="font-size:Small;">28.00</td><td style="font-size:Small;">30.00</td><td style="font-size:Small;">30.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">Class Participation</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">10.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">3.00</td><td style="font-size:Small;">A</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" rowspan="6" style="font-size:Small;">QUANTITATIVE ANALYSIS FOR MANAGEMENT-I&nbsp;</td><td align="left" style="font-size:Small;white-space:nowrap;">Quiz</td><td style="font-size:Small;">16.50</td><td style="font-size:Small;">20.00</td><td style="font-size:Small;">20.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">Mid Term</td><td style="font-size:Small;">28.50</td><td style="font-size:Small;">30.00</td><td style="font-size:Small;">30.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">End Term</td><td style="font-size:Small;">35.50</td><td style="font-size:Small;">40.00</td><td style="font-size:Small;">40.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">CP</td><td style="font-size:Small;">3.00</td><td style="font-size:Small;">5.00</td><td style="font-size:Small;">5.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">Assignment</td><td style="font-size:Small;">4.50</td><td style="font-size:Small;">5.00</td><td style="font-size:Small;">5.00</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td align="left" style="font-size:Small;white-space:nowrap;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">&nbsp;</td><td style="font-size:Small;">3.00</td><td style="font-size:Small;">A-</td>
+			</tr>
+		</tbody></table>
+	</div>
+                    <br>
+                    <div>
+		<table cellspacing="0" cellpadding="4" rules="all" id="ctl00_Main_GridView2" style="background-color:White;border-color:#3366CC;border-width:1px;border-style:None;width:100%;border-collapse:collapse;">
+			<tbody><tr style="color:#CCCCFF;background-color:#003399;font-weight:bold;">
+				<th scope="col">Subject Name</th><th scope="col">Max Marks</th><th scope="col">Min Marks</th><th scope="col">Avg Marks</th><th scope="col">Standard Deviation of Marks</th><th scope="col">Total Marks</th><th scope="col">Percentile</th>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td>BEHAVIOUR IN ORGANIZATIONS&nbsp;</td><td>82.00</td><td>39.00</td><td>62.12</td><td>8.07</td><td>71.00</td><td>87.46</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td>COMMUNICATION &amp; CRITICAL THINKING FOR MANAGERS</td><td>87.63</td><td>37.38</td><td>65.85</td><td>6.44</td><td>70.38</td><td>77.88</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td>FINANCIAL REPORTING AND ANALYSIS&nbsp;</td><td>96.00</td><td>46.00</td><td>73.59</td><td>9.47</td><td>81.00</td><td>80.82</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td>INFORMATION TECHNOLOGY CONCEPTS&nbsp;</td><td>100.00</td><td>12.00</td><td>57.23</td><td>20.08</td><td>95.00</td><td>98.71</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td>LEGAL ASPECTS IN MANAGEMENT</td><td>82.00</td><td>47.50</td><td>64.93</td><td>7.44</td><td>80.50</td><td>99.35</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td>MANAGERIAL ECONOMICS</td><td>93.50</td><td>27.00</td><td>68.23</td><td>13.06</td><td>88.50</td><td>97.51</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td>MARKETING MANAGEMENT-I&nbsp;</td><td>96.30</td><td>47.80</td><td>73.63</td><td>8.85</td><td>92.00</td><td>98.75</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td>QUANTITATIVE ANALYSIS FOR MANAGEMENT-I&nbsp;</td><td>96.50</td><td>17.50</td><td>64.98</td><td>18.01</td><td>88.00</td><td>89.97</td>
+			</tr><tr style="color:#003399;background-color:White;">
+				<td>RESEARCH METHODOLOGY</td><td>69.00</td><td>50.00</td><td>57.17</td><td>7.41</td><td>0.00</td><td>0.00</td>
+			</tr>
+		</tbody></table>
+	</div>
+                    
+                    
+                    
+                </td>
+            </tr>
+        </tbody></table>
+    </div>
+
+                    </div>
+                
+</div>
+        </div>
+        <br><br>
+        <div id="pageFooter">
+            <div class="text-center" style="padding: 16px 12px; font-size: 0.85rem; color: #6c757d; line-height: 1.6;">
+                <div style="font-weight: 600; color: #1f5582;">
+                    IIM Sirmaur — Academic Management Portal
+                </div>
+                <div style="margin-top: 6px;">
+                    Copyright © 2015 - 2026
+                    <a href="https://www.assoftwaregroup.com/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #990000;">A AND S Software Consultancy Private Limited, India</a>
+                </div>
+            </div>
+            <div style="height: 6px; background-color: #4EA276;"></div>
+        </div>
+    
+
+<script type="text/javascript">
+//<![CDATA[
+Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":"ctl00_UpdatePanel1","displayAfter":100,"dynamicLayout":true}, null, null, $get("ctl00_Login1_UpdateProgress1"));
+});
+//]]>
+</script>
+</form>
+
+
+</body></html>

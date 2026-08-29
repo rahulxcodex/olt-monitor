@@ -1,0 +1,114 @@
+// modal-cleanup.js
+// Fixes the Bootstrap 5 + ASP.NET UpdatePanel modal-backdrop orphan bug.
+//
+// Root cause: the master page wraps all content in a single UpdatePanel.
+// Bootstrap appends .modal-backdrop to <body> (outside the UpdatePanel),
+// so when an async postback re-renders the panel the backdrop and the
+// 'modal-open' class on <body> are left behind, graying out the screen.
+//
+// Usage on any <asp:Button> inside a modal:
+//   OnClientClick="if(!doValidation()) return false; cleanupModal('myModalId');"
+// The function must be called BEFORE the postback fires (i.e. in OnClientClick).
+
+function cleanupModal(modalId) {
+    var m = document.getElementById(modalId);
+    if (m) {
+        try {
+            var inst = bootstrap.Modal.getInstance(m);
+            if (inst) { inst.dispose(); }
+        } catch (e) { }
+        m.classList.remove('show');
+        m.style.display = 'none';
+        m.setAttribute('aria-hidden', 'true');
+        m.removeAttribute('aria-modal');
+        m.removeAttribute('role');
+    }
+    document.querySelectorAll('.modal-backdrop').forEach(function (el) {
+        el.parentNode.removeChild(el);
+    });
+    document.body.classList.remove('modal-open');
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+}
+
+// Double-click / duplicate-postback prevention.
+// On the first click of any submit/button element the element is marked busy.
+// Any further click before the page reloads (full postback) or the async
+// postback completes (UpdatePanel) is silently swallowed.
+// A 15-second safety-net clears the flag if the postback never completes.
+(function () {
+    var BUSY = '_oltBusy';
+
+    function isTrigger(el) {
+        if (!el) return false;
+        var tag  = el.tagName;
+        var type = (el.getAttribute('type') || '').toLowerCase();
+        return (tag === 'INPUT'  && (type === 'submit' || type === 'button')) ||
+               (tag === 'BUTTON' && (type === 'submit' || type === 'button' || type === ''));
+    }
+
+    // capture=true so we run before ASP.NET's own onclick handlers
+    document.addEventListener('click', function (e) {
+        var el = e.target;
+        // Walk up in case the click landed on a child element (e.g. icon inside button)
+        while (el && el !== document.body) {
+            if (isTrigger(el)) break;
+            el = el.parentElement;
+        }
+        if (!el || !isTrigger(el)) return;
+
+        if (el[BUSY]) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            return;
+        }
+        el[BUSY] = true;
+        // Safety net: release lock after 15 s in case postback silently fails
+        setTimeout(function () { el[BUSY] = false; }, 15000);
+    }, true);
+
+    // Re-enable all buttons after every async (UpdatePanel) postback
+    function hookEndRequest() {
+        if (typeof Sys !== 'undefined' &&
+            Sys.WebForms &&
+            Sys.WebForms.PageRequestManager) {
+            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
+                document.querySelectorAll(
+                    'input[type=submit], input[type=button], button'
+                ).forEach(function (b) { b[BUSY] = false; });
+            });
+        }
+    }
+    if (typeof Sys !== 'undefined') {
+        hookEndRequest();
+    } else {
+        document.addEventListener('DOMContentLoaded', hookEndRequest);
+    }
+})();
+
+// Safety net: after every async postback, if no modal is actually visible
+// but a stray backdrop or 'modal-open' lingers, clean it up.
+(function () {
+    function registerEndRequest() {
+        if (typeof Sys !== 'undefined' &&
+            Sys.WebForms &&
+            Sys.WebForms.PageRequestManager) {
+            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
+                if (!document.querySelector('.modal.show')) {
+                    document.querySelectorAll('.modal-backdrop').forEach(function (el) {
+                        el.parentNode.removeChild(el);
+                    });
+                    document.body.classList.remove('modal-open');
+                    document.body.style.overflow = '';
+                    document.body.style.paddingRight = '';
+                }
+            });
+        }
+    }
+    if (typeof Sys !== 'undefined') {
+        registerEndRequest();
+    } else {
+        // ScriptManager not yet initialised — wait for it
+        document.addEventListener('DOMContentLoaded', registerEndRequest);
+    }
+})();

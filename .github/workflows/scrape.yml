@@ -1,0 +1,106 @@
+name: OLT Scrape
+
+on:
+  # Hourly on the hour, 09:00–19:00 IST (11 runs a day).
+  # Cron is UTC and India is UTC+5:30, so :30 past hours 3–13 UTC
+  # lands exactly on the hour in IST.
+  schedule:
+    # 9:00 AM to 7:00 PM IST is 03:30 to 13:30 UTC
+    - cron: "30,35,40,45,50,55 3 * * *"
+    - cron: "*/5 4-12 * * *"
+    - cron: "0,5,10,15,20,25,30 13 * * *"
+  # Lets Apps Script (and you) force a run on demand.
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: olt-scrape
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - run: python -m playwright install --with-deps chromium
+
+      - name: Scrape
+        id: scrape
+        continue-on-error: true
+        env:
+          LOGIN_ID: ${{ secrets.LOGIN_ID }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          TOTP_SECRET: ${{ secrets.TOTP_SECRET }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          PAGES: ${{ vars.PAGES }}
+          TERM: ${{ vars.TERM }}
+        run: python scrape.py
+
+      # The real data (data/latest.json) is gitignored and already sitting in
+      # Supabase by this point — it never touches git. Only commit the
+      # non-sensitive heartbeat: this is what keeps GitHub from disabling the
+      # schedule after 60 days of repo inactivity, safely, in a public repo.
+      - name: Commit heartbeat
+        run: |
+          git config user.name  "olt-scraper"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f status.json
+          if git diff --cached --quiet; then
+            echo "Nothing changed."
+          else
+            git commit -m "heartbeat $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+
+      # Disabled on the public repo: Actions artifacts on a public repo are
+      # downloadable by anyone, and debug/ can contain a screenshot/HTML dump
+      # of the portal. dump() only fires on the login page (before any
+      # authenticated/graded content loads), so the exposure is low, but
+      # "low" isn't "none" — re-enable only if you're fine with that, or
+      # point it at a private destination (e.g. a Supabase storage bucket)
+      # instead of a public GitHub artifact.
+      # - name: Upload debug artefacts
+      #   if: always()
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: debug-${{ github.run_id }}
+      #     path: debug/
+      #     retention-days: 7
+      #     if-no-files-found: ignore
+
+      - name: Summarise
+        if: always()
+        run: |
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json, pathlib
+          f = pathlib.Path("data/latest.json")
+          d = json.loads(f.read_text()) if f.exists() else {}
+          print("## Scrape result\n")
+          print(f"- ok: `{d.get('ok')}`")
+          print(f"- scraped_at: `{d.get('scraped_at')}`")
+          if d.get("error"):
+              print(f"- error: `{d['error']}`")
+          for k, v in (d.get("pages") or {}).items():
+              print(f"- {k}: {len(v)} chars")
+          PY
+
+      - name: Fail the run if the scrape failed
+        if: steps.scrape.outcome != 'success'
+        run: |
+          echo "Scrape step failed. Expand the 'Scrape' step above for the"
+          echo "traceback, and download the debug-* artefact for a screenshot."
+          exit 1

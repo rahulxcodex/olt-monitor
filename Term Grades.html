@@ -1,0 +1,551 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0041)https://olt.iimsirmaur.ac.in/TermMarksNew -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Term Grades</title><link href="./Term Grades_files/default.css" rel="stylesheet" type="text/css">
+    <script src="./Term Grades_files/jquery-3.7.1.min.js.download" type="text/javascript"></script>
+    <link href="./Term Grades_files/bootstrap.min.css" rel="stylesheet" type="text/css"><link href="./Term Grades_files/bootstrap-icons.min.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript">
+        //<![CDATA[
+        document.addEventListener('DOMContentLoaded', function () {
+            // Select the elements for which you want to disable the context menu
+            var elements = document.querySelectorAll('a'); // This selects all links, adjust the selector as needed
+
+            // Add event listener to each element
+            elements.forEach(function (element) {
+                element.addEventListener('contextmenu', function (event) {
+                    // Prevent the default context menu
+                    event.preventDefault();
+                });
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            // Select the elements for which you want to disable Ctrl+click
+            var links = document.querySelectorAll('a'); // This selects all links, adjust the selector as needed
+
+            // Add event listener to each link
+            links.forEach(function (link) {
+                link.addEventListener('click', function (event) {
+                    // Check if the Ctrl key is pressed during the click
+                    if (event.ctrlKey) {
+                        // Prevent the default action (which is to open the link in a new tab/window)
+                        event.preventDefault();
+                    }
+                });
+                link.addEventListener('mousedown', function (event) {
+                    // Check if the middle mouse button was clicked (button value 1)
+                    if (event.button === 1) {
+                        // Prevent the default action
+                        alert("Not allowed");
+                        event.preventDefault();
+                    }
+                });
+            });
+        });
+        
+        function HandleClose() {
+
+            if (window.event.clientY < 0 && window.event.clientY < -80) {
+                if (document.getElementById("ctl00_Login1_LoginView1_ButtonLogOff") != null) {
+                    alert("It shall Signout!");
+                    WebService.AbandonSession();
+                }
+            }
+        }
+              //]]>
+    </script>
+<meta http-equiv="Refresh" content="2700;/default?d=timeout"><script type="text/javascript">Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":"ctl00_UpdatePanel1","displayAfter":100,"dynamicLayout":true}, null, null, $get("ctl00_Login1_UpdateProgress1"));
+});
+</script><script type="text/javascript">Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":"ctl00_UpdatePanel1","displayAfter":100,"dynamicLayout":true}, null, null, $get("ctl00_Login1_UpdateProgress1"));
+});
+</script><script type="text/javascript">Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":"ctl00_UpdatePanel1","displayAfter":100,"dynamicLayout":true}, null, null, $get("ctl00_Login1_UpdateProgress1"));
+});
+</script></head>
+<body>
+    <form method="post" action="https://olt.iimsirmaur.ac.in/TermMarksNew" id="aspnetForm">
+<div class="aspNetHidden">
+
+
+
+
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="./Term Grades_files/WebResource.axd" type="text/javascript"></script>
+
+
+<script src="./Term Grades_files/ScriptResource.axd" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+</script>
+
+<script src="./Term Grades_files/ScriptResource(1).axd" type="text/javascript"></script>
+<script src="./Term Grades_files/bootstrap.bundle.min.js.download" type="text/javascript"></script>
+<script src="./Term Grades_files/modal-cleanup.js.download" type="text/javascript"></script>
+<script src="./Term Grades_files/chart.umd.min.js.download" type="text/javascript"></script>
+<script src="./Term Grades_files/jsdebug" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	
+	
+</div>
+        
+        <div id="pageHeader">
+            <img id="ctl00_Image1" class="img-fluid" src="./Term Grades_files/banner-IIMSirmaur-studentweb.png" style="width:100%;">
+        </div>
+        <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ToolkitScriptManager1', 'aspnetForm', ['tctl00$UpdatePanel1',''], [], [], 3000, 'ctl00');
+//]]>
+</script>
+
+
+        <div id="colContainer" class="container">
+
+            <div id="ctl00_UpdatePanel1">
+                    <div>
+                        
+
+<script type="text/javascript">   
+    window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection; //compatibility for Firefox and chrome
+    var pc = new RTCPeerConnection({ iceServers: [] }), noop = function () { };
+    pc.createDataChannel(''); //create a bogus data channel
+    pc.createOffer(pc.setLocalDescription.bind(pc), noop); // create offer and set local description
+    pc.onicecandidate = function (ice) {
+        if (ice && ice.candidate && ice.candidate.candidate) {
+            // Capture the result of the exec call into a temporary variable
+            var match = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate);
+
+            // Check if a match was actually found before accessing index [1]
+            if (match && match[1]) {
+                var myIP = match[1];
+                document.getElementById("ctl00_Login1_TextBoxIP").value = myIP;
+                pc.onicecandidate = noop;
+            }
+        }
+    };
+</script>
+<input name="ctl00$Login1$TextBoxIP" type="text" id="ctl00_Login1_TextBoxIP" style="display: none;">
+<table style="width: 100%">
+    <tbody><tr>
+        <td style="text-align: center">
+            <div id="ctl00_Login1_UpdateProgress1" style="display:none;" role="status" aria-hidden="true">
+	
+                    <div id="ctl00_Login1_Panel1" class="CenterPosition" style="border-color:#CCFFCC;z-index: 100010!Important">
+		
+                        <span id="ctl00_Login1_LabelMsg" class="LabelStyle">Processing ..</span><br>
+                        <img id="ctl00_Login1_ajaxload" src="./Term Grades_files/ajax-loader.gif">
+                    
+	</div>
+                
+</div>
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: center">
+            
+                    <table style="width: 100%">
+                        <tbody><tr>
+                            <td style="text-align: left">
+                                <span id="ctl00_Login1_LoginView1_LabelWelcome" class="LabelStyle">Welcome </span>
+                                <span id="ctl00_Login1_LoginView1_LabelLoginName" class="LabelStyle">RAHUL GUPTA</span>
+                                <span id="ctl00_Login1_LoginView1_LabelClientIp" class="LabelStyle">Client IP:117.240.176.177/ Public Ip:117.240.176.177</span>
+                            </td>
+                            <td style="text-align: right; vertical-align: middle">
+                                <a id="ctl00_Login1_LoginView1_ButtonLogOff" class="LabelStyle" href="javascript:__doPostBack(&#39;ctl00$Login1$LoginView1$ButtonLogOff&#39;,&#39;&#39;)" style="display:inline-block;height:20px;">Sign off</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div id="ctl00_Login1_LoginView1_MenuStatic1_PanelStudent">
+	
+    <nav class="navbar navbar-expand-lg my-navbar">
+        <div class="container-fluid">
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#MenuStudent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="MenuStudent">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a href="https://olt.iimsirmaur.ac.in/TermMarksNew#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://olt.iimsirmaur.ac.in/StudentProfile">Student Profile</a></li>
+                            <li><a class="dropdown-item" href="https://olt.iimsirmaur.ac.in/ChangePassword">Change Password</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="https://olt.iimsirmaur.ac.in/TermMarksNew#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Activities </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://olt.iimsirmaur.ac.in/StudentElectiveSelection">Elective Selection</a></li>
+                            <li><a class="dropdown-item" href="https://olt.iimsirmaur.ac.in/FacultyFeedback">FeedBack</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="https://olt.iimsirmaur.ac.in/TermMarksNew#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Marks </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://olt.iimsirmaur.ac.in/SubjectMarksNew">Subject Marks</a></li>
+                            <li><a class="dropdown-item" href="https://olt.iimsirmaur.ac.in/TermMarksNew">Term Grades</a></li>
+                            <li><a class="dropdown-item" href="https://olt.iimsirmaur.ac.in/GradeRange">Grade Range</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="https://olt.iimsirmaur.ac.in/TermMarksNew#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Class </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://olt.iimsirmaur.ac.in/SubjectAttendence">Attendance</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="https://olt.iimsirmaur.ac.in/DocumentLocker">HBS CASES</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://olt.iimsirmaur.ac.in/DocumentLockerFaculty">Study Material</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    .my-navbar { background-color: #004080; }
+    .my-navbar .nav-link { color: #fff; }
+    .my-navbar .nav-link:hover, .my-navbar .nav-link:focus { color: #fff; background-color: #B05800; }
+    .my-navbar .nav-item.dropdown.show .nav-link { color: #e5dbdb; background-color: #425766; }
+    .my-navbar .dropdown-menu {
+        background-color: #2894FF;
+        color: #d7e2e9;
+        width: auto;
+        min-width: 14rem;
+        max-height: none;
+        overflow: visible;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        z-index: 1000;
+    }
+    .my-navbar .dropdown-item { color: #d7e2e9; }
+    .my-navbar .dropdown-item:hover, .my-navbar .dropdown-item:focus { background-color: #004182; color: #fff; }
+    .my-navbar .navbar-toggler { border-color: #d7e2e9; }
+    .my-navbar .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(215, 226, 233, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    .dropdown-submenu { position: relative; }
+    .dropdown-submenu > .dropdown-item::after {
+        display: block; content: ""; float: right;
+        width: 0; height: 0;
+        border-color: transparent; border-style: solid;
+        border-width: 4px 0 4px 4px; border-left-color: #fff;
+        margin-top: 6px; margin-right: -10px;
+    }
+    .dropdown-submenu > .dropdown-menu {
+        position: absolute; left: 100%; top: 0;
+        margin-left: 5px; display: none;
+    }
+    .dropdown-submenu.show > .dropdown-menu { display: block; }
+    .my-navbar .dropdown-submenu .dropdown-menu {
+        background-color: #2894FF; color: #d7e2e9;
+        max-height: none; overflow: visible; z-index: 1010;
+    }
+    .my-navbar .dropdown-submenu .dropdown-item { color: #d7e2e9; }
+    .my-navbar .dropdown-submenu .dropdown-item:hover,
+    .my-navbar .dropdown-submenu .dropdown-item:focus { background-color: #004182; color: #fff; }
+    @media (max-width: 991.98px) {
+        .dropdown-submenu > .dropdown-menu {
+            position: static; left: auto;
+            margin-left: 1.5rem; margin-top: 0.25rem;
+        }
+        .dropdown-submenu > .dropdown-item::after {
+            border-width: 4px 4px 0 4px;
+            border-top-color: #fff; border-left-color: transparent;
+            margin-top: 0.5rem;
+        }
+    }
+</style>
+<script>
+    function initializeDropdownMenus() {
+        $('li.dropdown-submenu a[data-bs-toggle="dropdown"]').off('click').on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var $submenu = $(this).parent();
+            var isCurrentlyOpen = $submenu.hasClass('show');
+            $submenu.siblings('.dropdown-submenu').removeClass('show');
+            $submenu.siblings('.dropdown-submenu').find('.dropdown-submenu').removeClass('show');
+            $submenu.find('.dropdown-submenu').removeClass('show');
+            if (isCurrentlyOpen) { $submenu.removeClass('show'); }
+            else { $submenu.addClass('show'); }
+        });
+        $(document).off('click.dropdown-submenu').on('click.dropdown-submenu', function (e) {
+            if (!$(e.target).closest('.dropdown-submenu').length && !$(e.target).closest('.dropdown').length) {
+                $('.dropdown-submenu').removeClass('show');
+            }
+        });
+        $('.dropdown').off('hidden.bs.dropdown').on('hidden.bs.dropdown', function () {
+            $(this).find('.dropdown-submenu').removeClass('show');
+        });
+        $('.dropdown').off('shown.bs.dropdown').on('shown.bs.dropdown', function () {
+            $('.dropdown').not(this).find('.dropdown-submenu').removeClass('show');
+        });
+    }
+    jQuery(document).ready(function () { initializeDropdownMenus(); });
+    if (typeof Sys !== 'undefined' && Sys.WebForms && Sys.WebForms.PageRequestManager) {
+        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
+            initializeDropdownMenus();
+        });
+    }
+</script>
+
+                            </td>
+                        </tr>
+                    </tbody></table>
+                
+        </td>
+    </tr>
+</tbody></table>
+<style>
+    .olt-intro-section {
+        padding: 20px;
+        margin-top: 10px;
+    }
+    .olt-title {
+        color: #1f5582;
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .olt-title i { color: #4a77d4; }
+    .olt-subtitle {
+        color: #6c757d;
+        font-family: 'Segoe UI', Verdana, sans-serif;
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+    }
+    .feature-cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 15px;
+    }
+    .feature-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 18px;
+        background: rgba(255,255,255,0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
+    }
+    .feature-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        background: rgba(255,255,255,0.9);
+    }
+    .feature-card-icon {
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.4rem;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    .feature-card-content h6 {
+        color: #1f5582;
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin: 0 0 5px 0;
+    }
+    .feature-card-content p {
+        color: #6c757d;
+        font-family: 'Segoe UI', Verdana, sans-serif;
+        font-size: 0.8rem;
+        margin: 0;
+        line-height: 1.4;
+    }
+    @media (max-width: 768px) {
+        .olt-intro-section { padding: 15px 10px; }
+        .olt-title { font-size: 1.25rem; }
+        .feature-cards-container { grid-template-columns: 1fr; }
+        .feature-card { padding: 15px; }
+        .feature-card-icon { width: 45px; height: 45px; min-width: 45px; font-size: 1.2rem; }
+    }
+</style>
+<script type="text/javascript">
+    function togglePassword() {
+        
+    }
+
+    function refreshCaptcha() {
+        
+        return false;
+    }
+</script>
+<div class="modal fade" id="modalOTP" tabindex="-1" aria-labelledby="modalOTPLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalOTPLabel">OTP Verification</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <span id="ctl00_Login1_LabelmsgOTP">
+                    Please enter OTP generated by Google Authenticator App
+                </span>
+                <br>
+                <input name="ctl00$Login1$TextBoxOTP" type="text" id="ctl00_Login1_TextBoxOTP" class="form-control text-center">
+            </div>
+            <div class="modal-footer justify-content-center">
+                <input type="submit" name="ctl00$Login1$ButtonClose" value="Submit" id="ctl00_Login1_ButtonClose" class="btn btn-secondary">
+            </div>
+        </div>
+    </div>
+</div>
+
+                    </div>
+                    <div id="pageContent">
+                        
+
+<div id="home" style="left: 0px; top: -1px">
+    <table style="width: 100%">
+        <tbody><tr>
+            <td style="text-align: center; height: 59px;" colspan="2">
+              <img id="ctl00_Main_Image1" class="img-fluid" src="./Term Grades_files/titletext.ashx" style="width:100%;"><br>
+&nbsp;<span id="ctl00_Main_Label1" style="color:Red;">Subject wise Viewing of Grades for Term-I is available and GPA/CGPA will be hidden if all subjects are not opened for viewing.</span><br>
+                   </td>
+        </tr>
+        <tr>
+            <td style="text-align: center; height: 86px;" colspan="2">
+                
+                <b>Select Term</b><br>
+                <select name="ctl00$Main$DropDownList1" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$Main$DropDownList1\&#39;,\&#39;\&#39;)&#39;, 0)" id="ctl00_Main_DropDownList1" class="form-select">
+	<option value=""></option>
+	<option selected="selected" value="Term-I">Term-I</option>
+	<option value="Term-II">Term-II</option>
+	<option value="Term-III">Term-III</option>
+
+</select>
+                <br>
+                
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center">
+                &nbsp;<div>
+	<table cellspacing="0" cellpadding="4" rules="all" id="ctl00_Main_GridView1" style="background-color:White;border-color:#3366CC;border-width:1px;border-style:None;width:100%;border-collapse:collapse;">
+		<tbody><tr style="color:#CCCCFF;background-color:#003399;font-size:Small;font-weight:bold;">
+			<th scope="col">Subject</th><th scope="col">Credit</th><th scope="col">Grade</th>
+		</tr><tr style="color:#003399;background-color:White;font-size:Small;">
+			<td align="left">BEHAVIOUR IN ORGANIZATIONS&nbsp;</td><td>3.00</td><td>A-</td>
+		</tr><tr style="color:#003399;background-color:White;font-size:Small;">
+			<td align="left">COMMUNICATION &amp; CRITICAL THINKING FOR MANAGERS</td><td>3.00</td><td>B+</td>
+		</tr><tr style="color:#003399;background-color:White;font-size:Small;">
+			<td align="left">FINANCIAL REPORTING AND ANALYSIS&nbsp;</td><td>3.00</td><td>A-</td>
+		</tr><tr style="color:#003399;background-color:White;font-size:Small;">
+			<td align="left">INFORMATION TECHNOLOGY CONCEPTS&nbsp;</td><td>1.50</td><td>A+</td>
+		</tr><tr style="color:#003399;background-color:White;font-size:Small;">
+			<td align="left">LEGAL ASPECTS IN MANAGEMENT</td><td>1.50</td><td>A+</td>
+		</tr><tr style="color:#003399;background-color:White;font-size:Small;">
+			<td align="left">MANAGERIAL ECONOMICS</td><td>3.00</td><td>A</td>
+		</tr><tr style="color:#003399;background-color:White;font-size:Small;">
+			<td align="left">MARKETING MANAGEMENT-I&nbsp;</td><td>3.00</td><td>A</td>
+		</tr><tr style="color:#003399;background-color:White;font-size:Small;">
+			<td align="left">QUANTITATIVE ANALYSIS FOR MANAGEMENT-I&nbsp;</td><td>3.00</td><td>A-</td>
+		</tr>
+	</tbody></table>
+</div>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center">
+                &nbsp;<span id="ctl00_Main_Label3" style="font-weight:bold;">GPA  </span>
+                <select size="4" name="ctl00$Main$ListBox1" id="ctl00_Main_ListBox1" style="height:24px;width:56px;">
+	<option value=" 8.43"> 8.43</option>
+
+</select>
+                </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center">
+               
+                <span id="ctl00_Main_Label2" style="font-weight:bold;">CGPA  </span>
+               <select size="4" name="ctl00$Main$ListBox3" id="ctl00_Main_ListBox3" style="height:24px;width:56px;">
+	<option value=" 8.43"> 8.43</option>
+
+</select>
+                </td>
+        </tr>
+    </tbody></table>
+</div>
+    
+    
+    
+
+                    </div>
+                </div>
+        </div>
+        <br><br>
+        <div id="pageFooter">
+            <div class="text-center" style="padding: 16px 12px; font-size: 0.85rem; color: #6c757d; line-height: 1.6;">
+                <div style="font-weight: 600; color: #1f5582;">
+                    IIM Sirmaur — Academic Management Portal
+                </div>
+                <div style="margin-top: 6px;">
+                    Copyright © 2015 - 2026
+                    <a href="https://www.assoftwaregroup.com/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #990000;">A AND S Software Consultancy Private Limited, India</a>
+                </div>
+            </div>
+            <div style="height: 6px; background-color: #4EA276;"></div>
+        </div>
+    
+
+<script type="text/javascript">
+//<![CDATA[
+Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":"ctl00_UpdatePanel1","displayAfter":100,"dynamicLayout":true}, null, null, $get("ctl00_Login1_UpdateProgress1"));
+});
+//]]>
+</script>
+<span style="display: none !important;"><input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value=""></span><span style="display: none !important;"><input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value=""></span><span style="display: none !important;"><input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value=""></span><span style="display: none !important;"><input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="d9EOPQRFSe4bUospV6WHrAL6mtIQncnY+R9/KVtOYwyK8BUkkO2p2SrVKa9XwLYRihQ6VoMBuMKli7cTo2mdkIZjVZBcCP4/jhuFrt4Yd8eOVtHucBM5vA1YG+URhUClOj/vsBmpIsQCUCcnd6+RYlUxwf7qglUF3Nev89szBDULrPoNxRA7yfqjUZCrukCytama55F2vW4Avrt/Pt0+TEZqFYgNjZB2uPMTxj/6bRXDPNDjHKHeU7B3Hv+4Ffi9SzDXjiaFPFeWGPY2XlRk4GVqMn/eF9HZXFNQUk2Sl8aDhuf687rQSVEqhnKTSi3ndEH9BvURQW+UpMOx4mfRYU4kVWJHDDsPVKkbZj/1YOUnLcDNWyKf495Pnwv+0XPhS5qo1KVCZZTIFzp3Es0ny1x2VB6uC+9VcN/EtJ7a+I6lJYi/sle7e3KDVOonYTrIdWCbpyeYBPSkZZerHBlHcz5KhwLxNKF3MuDJSglw3cLdgverC8aKY3ps3rVQaM1YQls1YzdYrWNeZ+IXAEZ2A5RpPiB4gGMztzDEmVBV6/qNFTsivJ58GTvJWX9TjVKUeFz3eLTjPbKuC+Td5c3rnOkunNHYK/9ZRZebksPB5IfMnP6xjUPbPL297U5e/q2WvN4z4ceCT5Dk4/cUHh0LzPrB+NFVtg7sB53qEolxpLnumFULGQiVALqiUvd2+kI9qeGjNEPAD3uaySutISb8oxeA8FP4OkA34T2oLXAzfojp7cmi7pe6mh23IpYlSPx4C0uStgdnloOzU9uHeqpJbQOpFSkn5H20lQIndRFi0ZvUnxmeYEC7+s5R5jYLUibKSEspSBzNkLfCSZZuWi6uKq5OLiGs+WGt4Ob6NdnjyRP1TPGchOx1p7hPH3pBjx1me7zeuSrOk5dLYeNEdiVuUir/HE3k5eer/C5ef+U23k+TAyW6AM1PC/c6Tbeeb5js1dOBaVDPisqyLeCbNyNCSHpYbwNUi70DBRHk5CCgV5lK1s77gjyNZ/DiOoePnhu4BbH0a7syS3HTI5dEyg71UQv95Jv+hw8FARcK+dhtpJ+tX3IlQWicbubv7KvKeCGy8sL8DuL5lojY8e5IvmoTORwG+PByAAz7v38vSpzzhpWPcxWQcdlj5ILWmNCSZa7KQU0On3tjKxfVBzuIxh2OQXMQXn7C9puFMHOHDG5S8VqkXTH9qMu0DTjAUaVUBykTMOTXgsXzkoI1yXW4BvlXUXgmEDK6S7CAKQboVB1BwUi0helI3P7Qr5LOjzwyZYLBkKeCMVU2FVXgcSwujbtDW6aBu7DXCugg/wK8qEy3a5NwYzHp2zHDGHlh1GgvYyFQNCsxqdAqGABAUi36YqfqeS+2GhaOolIHrGboJVIe6v+rhrJDunhtA6sxE0chB6ZjLTZlqxH1mld3seFp2QHxPgf6R0SWr35C27GO0u4NtQgEbJmXrZxuMeJtu7zl9I7aOPi31Qz9QhFnRvw1CvH2xVIHqRYo26WNkiuKl+0HjWnRZjWEtAvRpXXvLXONHCDqbrRjvwyOFTrpLo0V88GpOV34AtDQbAsDUJ6rXp8VaPP811q7KwgJKg2TXj+X+7PCgAer2LOSLl02XqllQL1N2lKmskZORTerd2PJvPpGp6xpuqgsFKsjTqjL1WUCUYjpY97DtcSB8x6euXJx0i3/UqFnSoWtjuwgGVSSPaQuA+7tsd1HJQuu3SkEZFnZNFqaAEe7xYvWph1TPms5vjEhu+cM+6EmekDUMiEXQkhqC5YOX+y10D7YR8QF6ywktaAZpCfE5bGEA53LdVE5xfiSVqnRVvNSw5TtjD8kixlpBQAf8XWyIuHA90aAnBDSvF3Wfk5+FBbyXU0e1t5s5TI8AejGcPj22nJSsw6wsfAaH1L15z0rw0m+c2RrLECU6II40yAN1k9wpSonsPamyUeVCA=="></span><span style="display: none !important;"><input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="F756886F"></span><span style="display: none !important;"><input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="gEtC/FqY6YUIjIy3ITbek/KRqsJcFT3POq4W33RVl45LEEXAI0LXoRZP9RNjy6lfaY7LaDn8VTkXQwtxczMXIMaI+huuJ5wxS1IEiyn4nt9U5VX6SL/DXfwoGjtbVRbPm6AnilGiL6Hw8EWKKsHkf4wUSNSccofngH52y2Kgleyks2XgzeMOitr/7pd5lKRuX88oQqzRE9VNlPRFJWMKpEsvT+Tumu/c99DNPSf2MIkBWF8OEt2idb+nso481XatS0Gt52FQdeo5qVmS+nlocQ2JJx335hocYTmYeWJ+aYt6PUK71yrglQBqfrmrsbM3"></span></form>
+
+
+</body></html>

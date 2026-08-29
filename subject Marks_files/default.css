@@ -1,0 +1,319 @@
+
+#pageHeader
+{
+    margin-left: auto;
+    margin-right: auto;
+    /*width: 1024px;*/
+    text-align: center;
+    /*background-image: url('images/maruti-student-web.png');*/
+    /*height: 300px;*/
+    background-repeat: no-repeat;
+}
+#topHeader
+{
+    margin-left: auto;
+    margin-right: auto;
+    /*width: 1024px;*/
+    text-align: center;
+}
+#bar
+{
+    margin-left: auto;
+    margin-right: auto;
+    /*width: 1024px;*/
+    text-align: center;
+    background-image: url('images/Bottom.gif');
+    background-repeat: no-repeat;
+}
+#colContainer
+{
+    margin-left: auto;
+    margin-right: auto;
+    /*width: 1024px;*/
+    text-align: center;
+}
+#pageFooter
+{
+    margin-left: auto;
+    margin-right: auto;
+    /*width: 1024px;*/
+    text-align: center;
+    text-decoration: none;
+    height: 80px;
+    color: #990000;
+    font-family: Calibri;
+    font-size: medium;
+    background-color: #E9E9E9;
+    vertical-align: middle;
+}
+#bottomFooter
+{
+    margin-left: auto;
+    margin-right: auto;
+    /*width: 1024px;*/
+    text-align: center;
+    background-image: url('images/Bottom.gif');
+    background-repeat: no-repeat;
+}
+#pageMenu
+{
+    float: left;
+    width: 175px;
+}
+#title
+{
+    color: #00793A;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: Arial;
+    text-align: center;
+}
+#pageContent
+{
+    margin-left: auto;
+    margin-right: auto;
+    /*width: 1024px;*/
+    text-align: left;
+}
+.GridViewStyle
+{
+    font-family: Arial,Sans-Serif;
+    font-size: smaller;
+    table-layout: auto;
+    border-collapse: collapse;
+    border: black 1px solid;
+    margin-right: 0px;
+    text-align: center;
+    padding: 5px 5px 5px 5px;
+}
+.HeaderStyle {
+    background-image: none;
+    background-color: #4a77d4;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #FFFFFF;
+    text-align: center;
+    text-decoration: none;
+}
+.HeaderStyleLeft {
+    text-align: left !important;
+}
+/*.PagerStyle
+{
+    background-image: url(images/buttonblue.gif);
+    background-position: center;
+    background-repeat: repeat-x;
+    background-color: #eef3f6;
+    color: #FFFFFF;
+}*/
+.AlternateRowStyle
+{
+    background-color: #eef3f6;
+}
+.AltRowStyle
+{
+    background-color: #eef3f6;
+}
+.alt-row-style
+{
+    background-color: #eef3f6;
+}
+.RowStyle
+{
+    background-color: #ffffff;
+}
+.row-style
+{
+    background-color: #ffffff;
+}
+.selectedRowStyle
+{
+    background-color: silver;
+}
+.SelectedRowStyle
+{
+    background-color: silver;
+}
+.StaticMenuStyle
+{
+    background-color: #eef3f6;
+}
+.StaticMenuItemStyle
+{
+    color: black;
+    padding: 2px 0px 2px 0px;
+    text-align: left;
+    width: 10%;
+}
+.StaticHoverStyle
+{
+    background-color: #DDE3E6;
+    color: black;
+}
+.DynamicMenuStyle
+{
+    background-color: #DDE3E6;
+}
+.DynamicMenuItemStyle
+{
+    color: black;
+    padding: 0px 10px 2px 5px;
+    text-align: left;
+}
+.DynamicHoverStyle
+{
+    background-color: #eef3f6;
+    color: black;
+    border: 1px solid #DDE3E6;
+    padding: 0px 5px 0px 5px;
+}
+
+.ButtonStyle
+{
+    color: maroon;
+    text-decoration: none;
+    background-color: #eef3f6;
+    font-weight: normal;
+    font-size: x-small;
+}
+.ButtonUp
+{
+    background-position: center;
+    color: maroon;
+    text-decoration: none;
+    background-color: #eef3f6;
+    font-weight: normal;
+    font-size: x-small;
+    background-image: url('images/UpArrowBlue.png');
+    background-repeat: no-repeat;
+}
+.ButtonDown
+{
+    background-position: center;
+    color: maroon;
+    text-decoration: none;
+    background-color: #eef3f6;
+    font-weight: normal;
+    font-size: x-small;
+    background-image: url('images/DownArrowBlue.png');
+    background-repeat: no-repeat;
+}
+.LabelTitle
+{
+    color: black;
+    font-family: Verdana;
+    font-size: 1em;
+    font-weight: bold;
+}
+.LabelStyle
+{
+    text-align: center;
+    font-family: Verdana;
+    font-size: .7em;
+    color: black;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+.chkb {
+    text-align: center;
+    font-family: Verdana;
+    font-size: .7em;
+    color: black;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+.ErrorLabelStyle
+{
+    color: #00793A;
+}
+.TextboxStyle
+{
+    text-align: left;
+    border-width: 1px;
+    border-style: solid;
+    width: 175px;
+    font-size: .7em;
+}
+.GridTextboxStyle
+{
+    text-align: left;
+    border-style: none;
+    width: 175px;
+    font-size: 1em;
+}
+
+.HideStyle
+{
+    visibility: hidden;
+}
+.WaterMark
+{
+    background-color: Lime;
+    color: Navy;
+}
+#marqueecontainer
+{
+    position: relative;
+    width: 175px;
+    height: 200px;
+    background-color: white;
+    overflow: hidden;
+    padding: 0px;
+    padding-left: 0px;
+}
+.LoginStyle
+{
+    border: 1px solid #00793A;
+    background-color: #EAEAEA;
+}
+.empTextboxstyle
+{
+    text-align: left;
+    border-width: 1px;
+    border-style: solid;
+    width: 100px;
+    font-size: 0.7em;
+}
+.CenterPosition
+{
+    display: block;
+    border: thick solid #009933;
+    position: fixed;
+    width: 20%;
+    background-color: #EFF3FB;
+    text-align: center;
+    top: 50%;
+    left: 40%;
+  
+}
+
+.invisible
+{
+    position: absolute;
+    left: -1000px;
+}
+.promptclass
+{
+    color: White;
+    font-weight: bold;
+    background-color: Green;
+    text-align: center;
+    border: solid 1px green;
+}
+.borderonly
+{
+    border: solid 1px green;
+}
+.modalBackground {
+    background-color: lightgray;
+    opacity: 0.5;
+    filter: alpha(opacity=30);
+}
+.hiddencol
+{
+    display: none;
+}
+.timer
+{
+    padding:5px 5px 5px 5px;
+}
