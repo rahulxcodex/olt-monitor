@@ -4,7 +4,7 @@
  */
 
 // Your email address where you want to receive the notifications
-const TO_EMAIL = Session.getActiveUser().getEmail(); // Or replace with "your_email@example.com"
+const TO_EMAIL = Session.getActiveUser().getEmail() + ",rahulr24g@gmail.com";
 
 function main() {
   const url = PropertiesService.getScriptProperties().getProperty('SUPABASE_URL');
