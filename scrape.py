@@ -63,11 +63,9 @@ TIMEOUT_MS = int(env("NAV_TIMEOUT_MS", "60000"))
 HEADLESS = env("HEADLESS", "true").lower() == "true"
 
 PAGES = [
-    p.strip() for p in env(
-        "PAGES",
-        "SubjectAttendence,SubjectMarksNew,TermMarksNew,GradeRange,"
-        "DocumentLockerFaculty,StudentElectiveSelection",
-    ).split(",") if p.strip()
+    "SubjectAttendence",
+    "SubjectMarksNew",
+    "TermMarksNew"
 ]
 
 # Lines that differ on every single load. Without stripping these, every run
@@ -191,8 +189,7 @@ def login(page) -> None:
     log.info("logged in")
 
 
-TERM_ENV = env("TERM")  # e.g. "Term-IV" or "Term-IV,Term-V". Blank = use the latest term offered.
-TERMS = [t.strip() for t in TERM_ENV.split(",") if t.strip()]
+TERMS = ["Term-IV", "Term-V", "Term-VI"]
 
 # Option values look like "Term-I" ... "Term-IV".
 TERM_RE = re.compile(r"^\s*Term[-\s]", re.I)

@@ -45,8 +45,6 @@ jobs:
           TOTP_SECRET: ${{ secrets.TOTP_SECRET }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
-          PAGES: ${{ vars.PAGES }}
-          TERM: ${{ vars.TERM }}
         run: python scrape.py
 
       # The real data (data/latest.json) is gitignored and already sitting in
