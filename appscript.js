@@ -63,22 +63,37 @@ function main() {
   if (changes.length > 0) {
     console.log(`Found changes in ${changes.length} pages.`);
     
-    // Construct email body
-    let body = `Changes detected in your OLT portal on ${latest.scraped_at}:\n\n`;
+    // Construct email body as HTML
+    let htmlBody = `<h3>Changes detected in your OLT portal on ${latest.scraped_at}</h3>`;
     for (const diff of changes) {
-      body += `========================================\n`;
-      body += `PAGE: ${diff.page}\n`;
-      body += `========================================\n\n`;
-      body += `[NEW CONTENT]\n${diff.new}\n\n`;
+      htmlBody += `<h4 style="margin-bottom: 5px; color: #333;">PAGE: ${diff.page}</h4>`;
+      htmlBody += `<table border="1" cellpadding="5" style="border-collapse: collapse; font-family: sans-serif; text-align: left; margin-bottom: 20px;">`;
+      const lines = diff.new.split('\\n');
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (!line) continue;
+        htmlBody += `<tr>`;
+        const cells = line.split('|');
+        for (const cell of cells) {
+          // make the first row bold if it looks like a header, or just keep it normal.
+          if (i === 0) {
+            htmlBody += `<th style="background-color: #f2f2f2;">${cell.trim()}</th>`;
+          } else {
+            htmlBody += `<td>${cell.trim()}</td>`;
+          }
+        }
+        htmlBody += `</tr>`;
+      }
+      htmlBody += `</table>`;
     }
     
-    body += `\nCheck the portal: https://olt.iimsirmaur.ac.in/`;
+    htmlBody += `<p><a href="https://olt.iimsirmaur.ac.in/">Check the OLT portal here</a></p>`;
 
     // Send the email
     MailApp.sendEmail({
       to: TO_EMAIL,
       subject: "OLT Portal Update - Grades/Attendance Changed",
-      body: body
+      htmlBody: htmlBody
     });
     console.log("Notification email sent.");
 
