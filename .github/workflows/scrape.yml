@@ -1,14 +1,9 @@
 name: OLT Scrape
 
 on:
-  # Hourly on the hour, 09:00–19:00 IST (11 runs a day).
-  # Cron is UTC and India is UTC+5:30, so :30 past hours 3–13 UTC
-  # lands exactly on the hour in IST.
   schedule:
-    # 9:00 AM to 7:00 PM IST is 03:30 to 13:30 UTC
-    - cron: "30,35,40,45,50,55 3 * * *"
-    - cron: "*/5 4-12 * * *"
-    - cron: "0,5,10,15,20,25,30 13 * * *"
+    # Run every 5 minutes 24/7
+    - cron: "*/5 * * * *"
   # Lets Apps Script (and you) force a run on demand.
   workflow_dispatch:
 

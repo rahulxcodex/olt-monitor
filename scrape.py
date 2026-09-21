@@ -63,9 +63,10 @@ TIMEOUT_MS = int(env("NAV_TIMEOUT_MS", "60000"))
 HEADLESS = env("HEADLESS", "true").lower() == "true"
 
 PAGES = [
-    "SubjectAttendence",
-    "SubjectMarksNew",
-    "TermMarksNew"
+    p.strip() for p in env(
+        "PAGES",
+        "SubjectAttendence,SubjectMarksNew,TermMarksNew,GradeRange,StudentElectiveSelection",
+    ).split(",") if p.strip()
 ]
 
 # Lines that differ on every single load. Without stripping these, every run
@@ -116,16 +117,17 @@ def login(page) -> None:
     page.goto(LOGIN_URL, timeout=TIMEOUT_MS, wait_until="networkidle")
     log.info("login page loaded: %s", page.url)
 
-    pwd = page.locator("input[type=password]").first
+    if page.locator("a:has-text('Sign off')").is_visible() or "/StudentProfile" in page.url:
+        log.info("already logged in")
+        return
+
+    pwd = page.locator("#ctl00_Login1_LoginView1_Password, input[name*='Password'], input[type=password]").first
     pwd.wait_for(state="visible", timeout=TIMEOUT_MS)
 
-    visible_text = page.locator("input[type=text]:visible")
-    log.info("visible text inputs on the form: %d", visible_text.count())
-    if visible_text.count() == 0:
-        dump(page, "no-login-field")
-        raise RuntimeError("No visible login-id field on the login page")
+    user_input = page.locator("#ctl00_Login1_LoginView1_UserName, input[name*='UserName'], input[type=text]:visible").first
+    user_input.wait_for(state="visible", timeout=TIMEOUT_MS)
 
-    visible_text.first.fill(LOGIN_ID)
+    user_input.fill(LOGIN_ID)
     pwd.fill(PASSWORD)
 
     # The portal fills a hidden field with a WebRTC-derived IP. Containers
@@ -139,10 +141,11 @@ def login(page) -> None:
         pass
 
     clicked = False
-    for sel in ("a:has-text('Login')",
+    for sel in ("#ctl00_Login1_LoginView1_ButtonLogin",
+                "a[href*='ButtonLogin']",
+                "a:has-text('Login')",
                 "input[type=submit][value*='Login' i]",
-                "button:has-text('Login')",
-                "a[href*='ButtonLogin']"):
+                "button:has-text('Login')"):
         el = page.locator(sel).first
         if el.count() and el.is_visible():
             log.info("clicking login via %s", sel)
@@ -169,7 +172,7 @@ def login(page) -> None:
         page.locator("#ctl00_Login1_ButtonClose").click()
         page.wait_for_load_state("networkidle", timeout=TIMEOUT_MS)
 
-    if "ButtonLogOff" not in page.content():
+    if not (page.locator("a:has-text('Sign off')").is_visible() or "/StudentProfile" in page.url):
         dump(page, "login-failed")
         # Surface whatever the portal actually said, rather than guessing.
         said = ""
@@ -189,23 +192,14 @@ def login(page) -> None:
     log.info("logged in")
 
 
-TERMS = ["Term-IV", "Term-V", "Term-VI"]
+TERMS = [t.strip() for t in env("TERMS", "Term-IV,Term-V,Term-VI").split(",") if t.strip()]
 
 # Option values look like "Term-I" ... "Term-IV".
 TERM_RE = re.compile(r"^\s*Term[-\s]", re.I)
 
 
-def select_term(page, target_term: str | None = None) -> str | None:
-    """Switch the term dropdown, if the page has one.
-
-    Attendance and marks pages default to Term-I regardless of where you
-    actually are in the programme. The dropdown's onchange fires a
-    __doPostBack, so this is a full page reload, not a client-side filter.
-
-    Matching is on the option's visible text *or* its value: the attendance
-    page uses value="Term-IV", but ASP.NET commonly binds values to ids
-    (value="4", text "Term-IV") and we must handle both.
-    """
+def get_term_options(page) -> list[dict[str, str]]:
+    """Return all valid term options from any term dropdown on the page."""
     selects = page.locator("select")
     for i in range(selects.count()):
         sel = selects.nth(i)
@@ -215,81 +209,140 @@ def select_term(page, target_term: str | None = None) -> str | None:
         except Exception:  # noqa: BLE001
             continue
 
-        # Drop blanks and "-- select --" style placeholders.
         real = [o for o in opts
                 if (o["v"] or o["t"]) and "select" not in o["t"].lower()]
-        if len(real) < 2:
-            continue
-        if not all(TERM_RE.match(o["t"]) or TERM_RE.match(o["v"]) for o in real):
+        if len(real) >= 2 and all(TERM_RE.match(o["t"]) or TERM_RE.match(o["v"]) for o in real):
+            return real
+    return []
+
+
+def select_term(page, target_term: str) -> str | None:
+    """Switch the term dropdown to target_term, handling ASP.NET postbacks and UpdatePanels."""
+    selects = page.locator("select")
+    for i in range(selects.count()):
+        sel = selects.nth(i)
+        try:
+            opts = sel.locator("option").evaluate_all(
+                "els => els.map(e => ({v: e.value, t: (e.textContent||'').trim()}))")
+        except Exception:  # noqa: BLE001
             continue
 
-        # Explicit choice if it's on offer, otherwise the last one listed —
-        # the portal only lists terms that have started, so that's current.
+        real = [o for o in opts
+                if (o["v"] or o["t"]) and "select" not in o["t"].lower()]
+        if len(real) < 2 or not all(TERM_RE.match(o["t"]) or TERM_RE.match(o["v"]) for o in real):
+            continue
+
         want = None
-        if target_term:
-            for o in real:
-                if target_term.lower() in (o["v"].lower(), o["t"].lower()):
-                    want = o
-                    break
-            if not want:
-                log.info("  target term %s not found in dropdown", target_term)
-                return "_MISSING_"
-        want = want or real[-1]
-        shown = want["t"] or want["v"]
+        for o in real:
+            if target_term.lower() in (o["v"].lower(), o["t"].lower()):
+                want = o
+                break
+        if not want:
+            return "_MISSING_"
 
+        shown = want["t"] or want["v"]
         if sel.input_value() == want["v"]:
-            log.info("  term dropdown found; already on %s", shown)
+            log.info("  term dropdown already on %s", shown)
             return shown
 
-        log.info("  term dropdown found; switching to %s", shown)
+        log.info("  switching term dropdown to %s", shown)
         sel.select_option(want["v"])
-        page.wait_for_timeout(1200)          # onchange uses setTimeout(...,0)
+        page.wait_for_timeout(1000)
+        try:
+            proc = page.locator("text=/Processing/i")
+            if proc.count() and proc.first.is_visible():
+                proc.first.wait_for(state="hidden", timeout=15000)
+        except Exception:  # noqa: BLE001
+            pass
         page.wait_for_load_state("networkidle", timeout=TIMEOUT_MS)
-
-        after = page.locator("select").nth(i).input_value()
-        if after != want["v"]:
-            log.warning("  term did not stick (dropdown reads %r)", after)
+        page.wait_for_timeout(1500)
         return shown
 
-    log.info("  no term dropdown on this page")
     return None
 
 
 def tables(page) -> str:
     """Read real data tables as 'cell | cell | cell' lines.
 
-    Real data sits in tables the portal marks with GridViewStyle. Prefer those
-    when present; otherwise fall back to any table that looks like data. This
-    app nests layout tables several levels deep and renders profile values into
-    disabled <input> boxes, so read input values too and drop anything smaller
-    than 2x2.
+    Handles standard GridView tables, nested subject grade distribution tables
+    (GradeRange), and GPA/CGPA summary metrics (TermMarksNew).
     """
-    raw = page.evaluate(
+    return page.evaluate(
         """() => {
+             // 1. GradeRange special nested handling
+             const gradeRangeParent = document.getElementById('ctl00_Main_GridView1');
+             const hasNestedGridView2 = document.querySelector('[id*="GridView2"]');
+             if (gradeRangeParent && hasNestedGridView2) {
+               const lines = [];
+               for (let i = 0; i < gradeRangeParent.rows.length; i++) {
+                 const row = gradeRangeParent.rows[i];
+                 const childTable = row.querySelector('table');
+                 let subjectTitle = '';
+                 if (childTable) {
+                   const clone = row.cloneNode(true);
+                   const inner = clone.querySelector('table');
+                   if (inner) inner.remove();
+                   subjectTitle = clone.innerText.replace(/\\s+/g, ' ').trim();
+                 } else {
+                   subjectTitle = row.innerText.replace(/\\s+/g, ' ').trim();
+                 }
+                 if (subjectTitle && !/grade ranges/i.test(subjectTitle)) {
+                   lines.push(`### ${subjectTitle}`);
+                 }
+                 if (childTable) {
+                   for (const cr of childTable.rows) {
+                     const cells = Array.from(cr.cells).map(c => c.innerText.replace(/\\s+/g, ' ').trim()).filter(c => c);
+                     if (cells.length) lines.push(cells.join(' | '));
+                   }
+                   lines.push('');
+                 }
+               }
+               return lines.join('\\n').trim();
+             }
+
+             // 2. Standard GridView tables
              const all = Array.from(document.querySelectorAll('table'));
-             const grids = all.filter(t =>
-               /gridview/i.test((t.className || '') + ' ' + (t.id || '')));
+             const grids = all.filter(t => /gridview/i.test((t.className || '') + ' ' + (t.id || '')));
              const use = grids.length ? grids : all;
-             return use.map(t =>
-               Array.from(t.rows).map(r =>
+
+             const lines = [];
+             for (const t of use) {
+               const rows = Array.from(t.rows).map(r =>
                  Array.from(r.cells).map(c => {
                    const i = c.querySelector('input[type=text]');
-                   return ((i ? i.value : c.innerText) || '')
-                          .replace(/\\s+/g, ' ').trim();
-                 })));
+                   return ((i ? i.value : c.innerText) || '').replace(/\\s+/g, ' ').trim();
+                 }).filter(c => c)
+               ).filter(r => r.length > 0);
+
+               // Skip layout tables (< 2 rows or single cell rows)
+               if (rows.length < 2 || Math.max(...rows.map(r => r.length), 0) < 2) continue;
+
+               for (const r of rows) {
+                 lines.push(r.join(' | '));
+               }
+               lines.push('');
+             }
+
+             // 3. GPA / CGPA extraction (on TermMarksNew)
+             const gpaEl = document.getElementById('ctl00_Main_Label3')?.nextElementSibling ||
+                           Array.from(document.querySelectorAll('td')).find(td => /^GPA/i.test(td.innerText.trim()));
+             const cgpaEl = document.getElementById('ctl00_Main_Label2')?.nextElementSibling ||
+                            Array.from(document.querySelectorAll('td')).find(td => /^CGPA/i.test(td.innerText.trim()));
+
+             const gpaText = gpaEl?.innerText?.replace(/\\s+/g, ' ')?.replace(/^GPA\\s*/i, '')?.trim();
+             const cgpaText = cgpaEl?.innerText?.replace(/\\s+/g, ' ')?.replace(/^CGPA\\s*/i, '')?.trim();
+
+             const extras = [];
+             if (gpaText && /\\d/.test(gpaText)) extras.push(`GPA | ${gpaText}`);
+             if (cgpaText && /\\d/.test(cgpaText)) extras.push(`CGPA | ${cgpaText}`);
+             if (extras.length > 0) {
+               lines.push('');
+               lines.push(...extras);
+             }
+
+             return lines.join('\\n').trim();
            }"""
     )
-    lines = []
-    for tbl in raw:
-        rows = [r for r in tbl if any(r)]
-        if len(rows) < 2 or max((len(r) for r in rows), default=0) < 2:
-            continue
-        for row in rows:
-            cells = [c for c in row if c]
-            if cells:
-                lines.append(" | ".join(cells))
-        lines.append("")
-    return "\n".join(lines).strip()
 
 
 def push_supabase(record: dict) -> bool:
@@ -360,29 +413,40 @@ def main() -> int:
                     page.wait_for_timeout(1200)
                     log.info("%s:", path)
                     
-                    if not TERMS:
-                        term = select_term(page)
-                        body = clean(tables(page) or page.inner_text("body"))
-                        key = f"{path}_{term}" if term else path
-                        pages[key] = (f"Term | {term}\n{body}" if term else body)
-                        log.info("%s -> %d chars%s", key, len(pages[key]),
-                                 f" ({term})" if term else "")
-                    else:
-                        term = select_term(page, TERMS[0])
-                        if term is None:
-                            body = clean(tables(page) or page.inner_text("body"))
+                    opts = get_term_options(page)
+                    if not opts:
+                        body = clean(tables(page))
+                        if body:
                             pages[path] = body
-                            log.info("%s -> %d chars", path, len(pages[path]))
+                            log.info("%s -> %d chars", path, len(body))
                         else:
-                            for target_term in TERMS:
-                                term = select_term(page, target_term)
-                                if term == "_MISSING_":
-                                    continue
-                                if term:
-                                    body = clean(tables(page) or page.inner_text("body"))
+                            log.info("%s has no data tables published yet", path)
+                    else:
+                        log.info("  found %d term options: %s", len(opts), [o["t"] or o["v"] for o in opts])
+                        terms_to_scrape = []
+                        for t in TERMS:
+                            for o in opts:
+                                val = o["t"] or o["v"]
+                                if t.lower() in (o["v"].lower(), o["t"].lower()) and val not in terms_to_scrape:
+                                    terms_to_scrape.append(val)
+
+                        # Fallback to latest available term if none of the configured TERMS match
+                        # (e.g. TermMarksNew where only earlier terms are published so far)
+                        if not terms_to_scrape:
+                            fallback = opts[-1]["t"] or opts[-1]["v"]
+                            log.info("  no matching terms from %r; falling back to latest: %s", TERMS, fallback)
+                            terms_to_scrape = [fallback]
+
+                        for target_term in terms_to_scrape:
+                            term = select_term(page, target_term)
+                            if term and term != "_MISSING_":
+                                body = clean(tables(page))
+                                if body:
                                     key = f"{path}_{term}"
                                     pages[key] = f"Term | {term}\n{body}"
                                     log.info("%s -> %d chars (%s)", key, len(pages[key]), term)
+                                else:
+                                    log.info("%s_%s has no data tables published yet", path, term)
                 except Exception as exc:  # noqa: BLE001
                     log.error("failed on %s: %s", path, exc)
         except Exception as exc:  # noqa: BLE001

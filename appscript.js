@@ -135,8 +135,38 @@ function updateLastSeen(url, key, latestData) {
 }
 
 /**
+ * Optional: Run this on a 5-minute timer in Apps Script to force GitHub Actions
+ * to run on time (bypasses GitHub's scheduled cron queue delays).
+ * Requires GITHUB_PAT (personal access token with repo/actions scope) in Script Properties.
+ */
+function triggerGithubScrape() {
+  const token = PropertiesService.getScriptProperties().getProperty('GITHUB_PAT') ||
+                PropertiesService.getScriptProperties().getProperty('GITHUB_TOKEN');
+  if (!token) return;
+
+  const repo = "rahulxcodex/olt-monitor";
+  const url = `https://api.github.com/repos/${repo}/actions/workflows/scrape.yml/dispatches`;
+
+  try {
+    const res = UrlFetchApp.fetch(url, {
+      method: 'post',
+      headers: {
+        Authorization: 'Bearer ' + token,
+        Accept: 'application/vnd.github.v3+json',
+        'User-Agent': 'Google-Apps-Script'
+      },
+      payload: JSON.stringify({ ref: 'main' }),
+      muteHttpExceptions: true
+    });
+    console.log(`Dispatched GitHub workflow (status: ${res.getResponseCode()})`);
+  } catch (err) {
+    console.error("Failed to trigger GitHub workflow:", err);
+  }
+}
+
+/**
  * Run this function on a separate schedule if you want to explicitly keep Supabase awake.
- * However, the main() function running hourly is enough to keep Supabase active.
+ * Running main() every 5 minutes also keeps Supabase active.
  */
 function pingSupabase() {
   const url = PropertiesService.getScriptProperties().getProperty('SUPABASE_URL');
@@ -150,4 +180,18 @@ function pingSupabase() {
     muteHttpExceptions: true,
   });
   console.log("Pinged Supabase to keep it awake.");
+}
+
+/**
+ * Web App entry point: allows scrape.py to POST changes directly for zero-delay email alerts.
+ */
+function doPost(e) {
+  try {
+    main();
+    return ContentService.createTextOutput(JSON.stringify({ status: "ok" }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({ status: "error", error: String(err) }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
 }
