@@ -29,14 +29,19 @@ commits is `status.json` — a timestamp and an ok/fail flag, nothing personal.
    `PASSWORD` / `TOTP_SECRET`:
    - `SUPABASE_URL`
    - `SUPABASE_SERVICE_KEY`
+   - `APPS_SCRIPT_WEBHOOK_URL` (optional: Web App URL for zero-delay instant alerts)
 5. **Update the Apps Script project** to diff the results and send you an email.
    - Go to [script.google.com](https://script.google.com/) and create a new project.
    - Copy the contents of `appscript.js` from this repository into `Code.gs`.
    - Go to Project Settings → Script Properties and add:
      - `SUPABASE_URL`: (your Supabase URL)
      - `SUPABASE_SERVICE_KEY`: (your service_role key)
-   - Go to Triggers (the clock icon) and add a trigger for `main` to run on a Time-driven schedule (e.g., every hour).
-   - Optionally add a trigger for `pingSupabase` to run once a week, though the hourly `main` execution already keeps Supabase active.
+     - `TO_EMAIL` (optional: overrides default recipient email)
+     - `GITHUB_PAT` (optional: Personal Access Token with `repo` or `actions:write` scope if using `triggerGithubScrape`)
+   - **For rock-solid email timing (choose either or both)**:
+     - **Option A (Zero-Delay Webhook, Recommended)**: Click **Deploy → New deployment → Web app**. Set *Execute as: Me*, *Who has access: Anyone*. Copy the Web App URL and add it as the `APPS_SCRIPT_WEBHOOK_URL` secret in GitHub. Scraper will trigger email immediately upon pushing changes!
+     - **Option B (Reliable Scheduler)**: Go to Triggers (clock icon) and add a time-driven trigger for `triggerGithubScrape` (runs every 15-30 min). This forces GitHub Actions to run on time via API dispatch, bypassing GitHub's delayed cron queue.
+     - Add a fallback trigger for `main` to run hourly.
 6. **Push this repo as a brand-new public repo — do not flip your existing
    private repo to public.** See the warning below.
 7. **Trigger the workflow once by hand** (Actions tab → OLT Scrape → Run
@@ -82,5 +87,6 @@ two new Supabase secrets) on the new repo.
 | `TOTP_SECRET`           | Actions secret         | OTP, if the portal asks for one   |
 | `SUPABASE_URL`          | Actions secret         | Supabase project URL              |
 | `SUPABASE_SERVICE_KEY`  | Actions secret         | Bypasses RLS to write the row     |
+| `APPS_SCRIPT_WEBHOOK_URL` | Actions secret       | Optional: Instant email notification webhook |
 | `PAGES`                 | Actions repo variable  | Comma-separated list of pages to scrape |
-| `TERM`                  | Actions repo variable  | Optional: Comma-separated list of terms (e.g., `Term-IV,Term-V`) |
+| `TERMS`                 | Actions repo variable  | Optional: Comma-separated list of terms (e.g., `Term-IV,Term-V`) |

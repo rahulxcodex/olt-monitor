@@ -51,6 +51,7 @@ STATUS = Path(env("STATUS_PATH", "status.json"))
 # Supabase table; only whoever holds SUPABASE_SERVICE_KEY can read it back.
 SUPABASE_URL = env("SUPABASE_URL")
 SUPABASE_SERVICE_KEY = env("SUPABASE_SERVICE_KEY")
+APPS_SCRIPT_WEBHOOK_URL = env("APPS_SCRIPT_WEBHOOK_URL")
 
 logging.basicConfig(level="INFO", format="%(asctime)s %(levelname)-7s %(message)s")
 log = logging.getLogger("olt")
@@ -381,6 +382,28 @@ def push_supabase(record: dict) -> bool:
     return False
 
 
+def notify_webhook() -> bool:
+    """Trigger Apps Script Web App immediately for instant zero-delay email alerts."""
+    if not APPS_SCRIPT_WEBHOOK_URL:
+        return False
+    try:
+        req = urllib.request.Request(
+            APPS_SCRIPT_WEBHOOK_URL,
+            data=b"{}",
+            method="POST",
+            headers={"Content-Type": "application/json", "User-Agent": "olt-monitor-scraper"},
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            log.info("triggered Apps Script webhook (status %s)", resp.status)
+            return True
+    except urllib.error.HTTPError as exc:
+        log.info("Apps Script webhook response: %s", exc.code)
+        return True
+    except Exception as exc:  # noqa: BLE001
+        log.warning("could not trigger Apps Script webhook: %s", exc)
+        return False
+
+
 def main() -> int:
     if not (LOGIN_ID and PASSWORD):
         log.error("LOGIN_ID and PASSWORD are not set")
@@ -496,6 +519,8 @@ def main() -> int:
     log.info("wrote %s (%d pages)", OUT, len(pages))
 
     pushed = push_supabase(record)
+    if pushed and record["ok"]:
+        notify_webhook()
 
     # Heartbeat is the only thing that goes into git. No grades, no
     # attendance — just enough for Apps Script (and GitHub's 60-day
